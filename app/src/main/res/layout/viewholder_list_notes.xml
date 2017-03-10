@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/layout_item_height">
+
+    <RelativeLayout
+        android:id="@+id/RlAvatar"
+        android:layout_width="@dimen/image_size_smallest"
+        android:layout_height="@dimen/image_size_smallest"
+        android:layout_centerVertical="true">
+
+        <com.dev4u.ntc.notes.widget.CircleImageView
+            android:id="@+id/mImgNote"
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            android:layout_marginLeft="@dimen/layout_margin_small"
+            android:src="@drawable/ic_splash" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/mTvTiteNote"
+        style="@style/OneMediumBold"
+        android:layout_marginLeft="@dimen/layout_margin_medium"
+        android:layout_marginStart="@dimen/layout_margin_medium"
+        android:layout_marginTop="@dimen/layout_margin_medium"
+        android:layout_toEndOf="@+id/RlAvatar"
+        android:layout_toRightOf="@+id/RlAvatar"
+        android:text="@string/enter_a_note"
+        android:textColor="@color/black" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/mTvTimeNote"
+        style="@style/OneSmallNormal"
+        android:layout_below="@+id/mTvTiteNote"
+        android:layout_marginLeft="@dimen/layout_margin_medium"
+        android:layout_marginRight="@dimen/layout_margin_medium"
+        android:layout_marginStart="@dimen/layout_margin_medium"
+        android:layout_marginTop="@dimen/layout_margin_smallest"
+        android:layout_toEndOf="@+id/RlAvatar"
+        android:layout_toRightOf="@+id/RlAvatar"
+        android:text="6 thg 8, 2016"
+        android:textColor="@color/gray_light" />
+</RelativeLayout>

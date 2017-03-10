@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Notes</string>
+    <string name="message_waiting">Please waiting...</string>
+    <string name="enter_a_note">Please enter the note text...</string>
+    <string name="done">Done</string>
+    <string name="add_a_note">Add a Note</string>
+    <string name="list_notes">List notes</string>
 </resources>

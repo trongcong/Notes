@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // Text size
+    <dimen name="text_size_smallest">@dimen/_11sdp</dimen>
+    <dimen name="text_size_small">@dimen/_12sdp</dimen>
+    <dimen name="text_size_medium">@dimen/_15sdp</dimen>
+    <dimen name="text_size_big">@dimen/_17sdp</dimen>
+    <dimen name="text_size_bigger">@dimen/_22sdp</dimen>
+    <dimen name="text_size_biggest">@dimen/_30sdp</dimen>
+
+    <dimen name="text_margin_small">@dimen/_4sdp</dimen>
+    <dimen name="text_margin">@dimen/_10sdp</dimen>
+    <dimen name="radio_button_conner_radius">5dp</dimen>
+    <dimen name="radio_button_stroke_border">1dp</dimen>
+
+    // Padding
+    <dimen name="layout_padding_smallest">@dimen/_2sdp</dimen>
+    <dimen name="layout_padding_small">@dimen/_4sdp</dimen>
+    <dimen name="layout_padding_medium">@dimen/_8sdp</dimen>
+    <dimen name="layout_padding_big">@dimen/_12sdp</dimen>
+    <dimen name="layout_padding_bigger">@dimen/_18sdp</dimen>
+    <dimen name="layout_padding_biggest">@dimen/_90sdp</dimen>
+
+    // Image size
+    <dimen name="image_size_smallest">@dimen/_50sdp</dimen>
+    <dimen name="image_size_small">@dimen/_74sdp</dimen>
+    <dimen name="image_size_medium">@dimen/_84sdp</dimen>
+    <dimen name="image_size_big">@dimen/_130sdp</dimen>
+    <dimen name="image_size_biggest">@dimen/_144sdp</dimen>
+    <dimen name="image_padding">1.5dp</dimen>
+
+    <dimen name="item_size_width">@dimen/_20sdp</dimen>
+
+    <dimen name="icon_size_big">@dimen/_20sdp</dimen>
+    <dimen name="icon_size_small">@dimen/_8sdp</dimen>
+    <dimen name="icon_size">@dimen/_15sdp</dimen>
+
+    // Margin
+    <dimen name="layout_margin_smallest">@dimen/_2sdp</dimen>
+    <dimen name="layout_margin_small">@dimen/_4sdp</dimen>
+    <dimen name="layout_margin_medium">@dimen/_8sdp</dimen>
+    <dimen name="layout_margin_big">@dimen/_12sdp</dimen>
+    <dimen name="layout_margin_bigger">@dimen/_18sdp</dimen>
+    <dimen name="layout_margin_biggest">@dimen/_24sdp</dimen>
+
+    // Common
+    <dimen name="header_height">@dimen/_68sdp</dimen>
+    <dimen name="titlebar_height">@dimen/_36sdp</dimen>
+    <dimen name="titlebar_icon_padding">@dimen/_6sdp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="button_size">@dimen/_32sdp</dimen>
+    <dimen name="button_height">@dimen/_30sdp</dimen>
+    <dimen name="layout_chat">@dimen/_42sdp</dimen>
+    <dimen name="button_width_small">@dimen/_42sdp</dimen>
+    <dimen name="button_width_smallest">@dimen/_48sdp</dimen>
+    <dimen name="button_height_small">@dimen/_30sdp</dimen>
+    <dimen name="toolbar_height">@dimen/_42sdp</dimen>
+    <dimen name="button_double_height">@dimen/_38sdp</dimen>
+    <dimen name="button_width">@dimen/_130sdp</dimen>
+    <dimen name="button_width_medium">@dimen/_160sdp</dimen>
+    <dimen name="button_height_edittext">@dimen/_38sdp</dimen>
+
+    <dimen name="button_dialog_height">@dimen/_26sdp</dimen>
+    <dimen name="edit_text_height">@dimen/_32sdp</dimen>
+    <dimen name="edit_text_padding">@dimen/_12sdp</dimen>
+
+    <dimen name="loading_dialog_size">75dp</dimen>
+    <dimen name="item_offset">@dimen/_5sdp</dimen>
+    <dimen name="avatar_image_size">@dimen/_55sdp</dimen>
+    <dimen name="title_icon_size">@dimen/_20sdp</dimen>
+
+    <dimen name="popup_size_width">@dimen/_256sdp</dimen>
+    <dimen name="popup_size_height">@dimen/_110sdp</dimen>
+
+    <dimen name="layout_item_height">@dimen/_78sdp</dimen>
+</resources>
