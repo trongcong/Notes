@@ -9,7 +9,7 @@ import com.dev4u.ntc.notes.view.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
 
-    private static final int SPLASH_DELAY = 2000;
+    private static final int SPLASH_DELAY = 200;
 
     @Override
     protected int getContentView() {

@@ -1,22 +1,27 @@
 package com.dev4u.ntc.notes.view.list_note;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.dev4u.ntc.notes.Constant;
 import com.dev4u.ntc.notes.R;
 import com.dev4u.ntc.notes.model.Notes;
 import com.dev4u.ntc.notes.view.base.BaseAdapter;
-import com.dev4u.ntc.notes.widget.CircleImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * IDE: Android Studio
@@ -49,24 +54,47 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
 
     @Override
     public void onBindViewHolder(NoteHolder holder, int position) {
-//        Notes notes = mListNotes.get(position);
+        Notes notes = mListNotes.get(position);
+        holder.iconText.setText(notes.getContent().substring(0, 1));
+        holder.mTvTiteNote.setText(notes.getContent());
+        long time = Long.valueOf(notes.getTimestamps());
+        holder.mTvTimeNote.setText(Constant.getInstance().formatTime(time));
 
+        holder.mImgNote.setImageResource(R.drawable.bg_circle);
+        holder.mImgNote.setColorFilter(getRandomMaterialColor());
+    }
+
+    private int getRandomMaterialColor() {
+        int returnColor = Color.GRAY;
+        int arrayId = getResources().getIdentifier("notes_color", "array", getContext().getPackageName());
+
+        if (arrayId != 0) {
+            TypedArray colors = getResources().obtainTypedArray(arrayId);
+            int index = (int) (Math.random() * colors.length());
+            returnColor = colors.getColor(index, Color.GRAY);
+            colors.recycle();
+        }
+        return returnColor;
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mListNotes.size();
     }
 
     // Define the listener interface
     public interface OnItemClickListener {
         void onItemClick(View itemView, int position);
+
+        void onItemLongClick(View itemView, int position);
     }
 
 
     public class NoteHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.mImgNote)
-        CircleImageView mImgNote;
+        ImageView mImgNote;
+        @BindView(R.id.icon_text)
+        TextView iconText;
         @BindView(R.id.mTvTiteNote)
         AppCompatTextView mTvTiteNote;
         @BindView(R.id.mTvTimeNote)
@@ -87,6 +115,20 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
                             listener.onItemClick(itemView, position);
                         }
                     }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (listener != null) {
+                        // gets item position
+                        int position = getAdapterPosition();
+                        // Check if an item was deleted, but the user clicked it before the UI removed it
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemLongClick(itemView, position);
+                        }
+                    }
+                    return false;
                 }
             });
         }

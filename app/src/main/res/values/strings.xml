@@ -5,4 +5,6 @@
     <string name="done">Done</string>
     <string name="add_a_note">Add a Note</string>
     <string name="list_notes">List notes</string>
+    <string name="insert_note_success">Insert note success!</string>
+    <string name="insert_note_error">Insert note error!</string>
 </resources>

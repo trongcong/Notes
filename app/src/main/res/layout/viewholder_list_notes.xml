@@ -7,22 +7,32 @@
         android:id="@+id/RlAvatar"
         android:layout_width="@dimen/image_size_smallest"
         android:layout_height="@dimen/image_size_smallest"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:fillAfter="false"
+        android:fillEnabled="false">
 
-        <com.dev4u.ntc.notes.widget.CircleImageView
+        <ImageView
             android:id="@+id/mImgNote"
-            android:layout_width="@dimen/image_size_small"
-            android:layout_height="@dimen/image_size_small"
-            android:layout_marginLeft="@dimen/layout_margin_small"
-            android:src="@drawable/ic_splash" />
+            android:layout_width="@dimen/image_size_smallest"
+            android:layout_height="@dimen/image_size_smallest"
+            android:src="@drawable/bg_circle" />
+
+        <TextView
+            android:id="@+id/icon_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="A"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_22sdp" />
     </RelativeLayout>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/mTvTiteNote"
         style="@style/OneMediumBold"
+        android:layout_alignTop="@+id/RlAvatar"
         android:layout_marginLeft="@dimen/layout_margin_medium"
         android:layout_marginStart="@dimen/layout_margin_medium"
-        android:layout_marginTop="@dimen/layout_margin_medium"
         android:layout_toEndOf="@+id/RlAvatar"
         android:layout_toRightOf="@+id/RlAvatar"
         android:text="@string/enter_a_note"
@@ -31,13 +41,16 @@
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/mTvTimeNote"
         style="@style/OneSmallNormal"
-        android:layout_below="@+id/mTvTiteNote"
-        android:layout_marginLeft="@dimen/layout_margin_medium"
-        android:layout_marginRight="@dimen/layout_margin_medium"
-        android:layout_marginStart="@dimen/layout_margin_medium"
-        android:layout_marginTop="@dimen/layout_margin_smallest"
-        android:layout_toEndOf="@+id/RlAvatar"
-        android:layout_toRightOf="@+id/RlAvatar"
+        android:layout_alignBottom="@+id/RlAvatar"
+        android:layout_alignLeft="@+id/mTvTiteNote"
+        android:layout_alignStart="@+id/mTvTiteNote"
         android:text="6 thg 8, 2016"
         android:textColor="@color/gray_light" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray" />
 </RelativeLayout>
+

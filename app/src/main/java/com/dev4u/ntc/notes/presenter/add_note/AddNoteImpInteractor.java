@@ -9,15 +9,8 @@ package com.dev4u.ntc.notes.presenter.add_note;
  * Time: 22:42
  */
 
-public interface AddNoteInteractor {
+public interface AddNoteImpInteractor {
     boolean onValidateNote(String contentNote);
 
-    void addNote(String contentNote, OnAddNoteFinishedListener listener);
-
-    interface OnAddNoteFinishedListener {
-        void onAddNoteSuccess();
-
-        void onAddNoteError();
-    }
-
+    void addNote(String contentNote);
 }

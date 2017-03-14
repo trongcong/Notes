@@ -22,7 +22,7 @@
     <dimen name="layout_padding_biggest">@dimen/_90sdp</dimen>
 
     // Image size
-    <dimen name="image_size_smallest">@dimen/_50sdp</dimen>
+    <dimen name="image_size_smallest">@dimen/_40sdp</dimen>
     <dimen name="image_size_small">@dimen/_74sdp</dimen>
     <dimen name="image_size_medium">@dimen/_84sdp</dimen>
     <dimen name="image_size_big">@dimen/_130sdp</dimen>

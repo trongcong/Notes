@@ -1,5 +1,6 @@
 package com.dev4u.ntc.notes.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -32,6 +33,7 @@ import com.dev4u.ntc.notes.R;
  * Time: 01:22
  */
 
+@SuppressLint("AppCompatCustomView")
 public class CircleImageView extends ImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
