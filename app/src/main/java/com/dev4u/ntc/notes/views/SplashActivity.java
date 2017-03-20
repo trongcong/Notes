@@ -1,11 +1,11 @@
-package com.dev4u.ntc.notes.view;
+package com.dev4u.ntc.notes.views;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.dev4u.ntc.notes.R;
-import com.dev4u.ntc.notes.view.base.BaseActivity;
+import com.dev4u.ntc.notes.views.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
 

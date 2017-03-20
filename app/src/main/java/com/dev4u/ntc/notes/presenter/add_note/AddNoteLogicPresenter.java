@@ -29,7 +29,7 @@ public class AddNoteLogicPresenter implements AddNoteImpInteractor {
 
     @Override
     public boolean onValidateNote(String contentNote) {
-        return !contentNote.isEmpty();
+        return !contentNote.trim().isEmpty();
     }
 
     @Override

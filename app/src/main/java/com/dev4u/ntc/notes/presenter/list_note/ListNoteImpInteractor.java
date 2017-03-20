@@ -7,14 +7,12 @@ import com.dev4u.ntc.notes.model.Notes;
  * Created by Nguyen Trong Cong  - 2DEV4U.COM
  * Name packge: com.dev4u.ntc.notes.presenter.list_note
  * Name project: Notes
- * Date: 3/10/2017
- * Time: 17:20
+ * Date: 3/15/2017
+ * Time: 11:22
  */
 
-public interface ListNoteView {
-    void showNoteListView(Notes notes);
+public interface ListNoteImpInteractor {
+    void loadNotes(Notes notes);
 
-    void delteNoteSuccess();
-
-    void delteNoteError();
+    void deleteNote(Notes notes);
 }

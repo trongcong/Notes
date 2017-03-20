@@ -1,4 +1,4 @@
-package com.dev4u.ntc.notes.view.list_note;
+package com.dev4u.ntc.notes.views.list_note;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,9 +14,8 @@ import android.widget.TextView;
 import com.dev4u.ntc.notes.Constant;
 import com.dev4u.ntc.notes.R;
 import com.dev4u.ntc.notes.model.Notes;
-import com.dev4u.ntc.notes.view.base.BaseAdapter;
+import com.dev4u.ntc.notes.views.base.BaseAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +34,7 @@ import butterknife.ButterKnife;
 public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
     private OnItemClickListener listener;
 
-    private List<Notes> mListNotes = new ArrayList<>();
+    private List<Notes> mListNotes;
 
     protected NoteAdapter(Context context, List<Notes> notesList) {
         super(context);
@@ -55,13 +54,32 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
     @Override
     public void onBindViewHolder(NoteHolder holder, int position) {
         Notes notes = mListNotes.get(position);
-        holder.iconText.setText(notes.getContent().substring(0, 1));
-        holder.mTvTiteNote.setText(notes.getContent());
+        String contentNote = notes.getContent().trim();
+        String firstChar = fChar(contentNote);
+        if (Character.isLetter(firstChar.charAt(0))) {
+            holder.iconText.setText(firstChar);
+        } else {
+            holder.iconText.setText(contentNote.substring(1, 2).toUpperCase());
+        }
+
+        holder.mTvTiteNote.setText(firstChar + contentNote.substring(1));
         long time = Long.valueOf(notes.getTimestamps());
         holder.mTvTimeNote.setText(Constant.getInstance().formatTime(time));
 
         holder.mImgNote.setImageResource(R.drawable.bg_circle);
         holder.mImgNote.setColorFilter(getRandomMaterialColor());
+    }
+
+    private String fChar(String str) {
+        String fLetter;
+        if (str.length() > 0) {
+//            if (Character.isLetter(str.charAt(0))) {
+            fLetter = str.substring(0, 1).toUpperCase();
+//            } else {
+//                fLetter = str.substring(1, 2).toUpperCase();
+//            }
+        } else return "";
+        return fLetter;
     }
 
     private int getRandomMaterialColor() {
@@ -88,7 +106,6 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
 
         void onItemLongClick(View itemView, int position);
     }
-
 
     public class NoteHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.mImgNote)

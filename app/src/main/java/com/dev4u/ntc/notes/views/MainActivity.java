@@ -1,12 +1,12 @@
-package com.dev4u.ntc.notes.view;
+package com.dev4u.ntc.notes.views;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.dev4u.ntc.notes.R;
-import com.dev4u.ntc.notes.view.base.BaseActivity;
-import com.dev4u.ntc.notes.view.list_note.ListNoteFragment;
+import com.dev4u.ntc.notes.views.base.BaseActivity;
+import com.dev4u.ntc.notes.views.list_note.ListNoteFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

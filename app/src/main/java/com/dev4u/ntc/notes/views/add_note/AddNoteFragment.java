@@ -1,4 +1,4 @@
-package com.dev4u.ntc.notes.view.add_note;
+package com.dev4u.ntc.notes.views.add_note;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import com.dev4u.ntc.notes.R;
 import com.dev4u.ntc.notes.presenter.add_note.AddNoteLogicPresenter;
 import com.dev4u.ntc.notes.presenter.add_note.AddNoteView;
-import com.dev4u.ntc.notes.view.base.BaseFragment;
+import com.dev4u.ntc.notes.views.base.BaseFragment;
 import com.dev4u.ntc.notes.widget.AlphaTextView;
 
 import butterknife.BindView;
@@ -84,18 +84,18 @@ public class AddNoteFragment extends BaseFragment implements AddNoteView {
     @Override
     public void addNoteSuccess() {
         showToastLong(getString(R.string.insert_note_success));
+        getFragmentManager().popBackStack();
     }
 
     @Override
     public void addNoteError() {
         showToastLong(getString(R.string.insert_note_error));
+        getFragmentManager().popBackStack();
     }
 
     @OnClick(R.id.mTvDone)
     public void onClick() {
         mAddNotePresenter.addNote(mEdContentNote.getText().toString());
-        getFragmentManager().popBackStack();
-
     }
 
 }

@@ -20,5 +20,11 @@ public interface ISqliteDao {
 
     boolean deleteNotes(Notes notes);
 
+    boolean updateNote(Notes notes);
+
+    void getNote(SQLCallback sqlCallback);
+
     List<Notes> getListNotes();
+
+    Notes getNote(int idNote);
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/mToolBarView"
+        layout="@layout/toolbar_view" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mToolBarView"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mTvDetailNote"
+                style="@style/ParagraphSmallNormalBlack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/edit_text_padding"
+                android:text="Content notes"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_medium" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/mEdContentNoteEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:focusableInTouchMode="true"
+                android:gravity="top|left"
+                android:hint="@string/enter_a_note"
+                android:padding="@dimen/edit_text_padding"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+
+    </ScrollView>
+</RelativeLayout>

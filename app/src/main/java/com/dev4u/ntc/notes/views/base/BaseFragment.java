@@ -1,4 +1,4 @@
-package com.dev4u.ntc.notes.view.base;
+package com.dev4u.ntc.notes.views.base;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment implements BaseView {
     protected final String TAG = this.getClass().getSimpleName();
-    @BindView(R.id.mTvTitle)
+    @BindView(R.id.mTvTitleActionbar)
     TextView mTvTitle;
     @BindView(R.id.mImgLeft)
     ImageView mImgLeft;

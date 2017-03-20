@@ -1,4 +1,4 @@
-package com.dev4u.ntc.notes.view.base;
+package com.dev4u.ntc.notes.views.base;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

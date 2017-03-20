@@ -72,7 +72,7 @@ public class SQLDatabaseManager extends SQLiteOpenHelper implements ISqliteSchem
     @Override
     public boolean deleteNotes(Notes notes) {
         try {
-            int result = delete(TBL_NOTES, COL_ID + "=?", new String[]{String.valueOf(notes.getId())});
+            int result = delete(TBL_NOTES, COL_ID + "=?", new String[]{notes.getId() + ""});
             if (result != -1) return true;
             Log.e("deleteNotes", "Ok " + result);
         } catch (Exception e) {
@@ -80,6 +80,50 @@ public class SQLDatabaseManager extends SQLiteOpenHelper implements ISqliteSchem
         } finally {
         }
         return false;
+    }
+
+    @Override
+    public boolean updateNote(Notes notes) {
+        try {
+            int result = update(TBL_NOTES, notes.getValues(), COL_ID + "=?", new String[]{String.valueOf(notes.getId())});
+            if (result != -1) return true;
+            Log.e("updateNote", "Ok " + result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
+        return false;
+    }
+
+    @Override
+    public Notes getNote(int idNote) {
+        Notes notes = new Notes();
+        String sql = "select * from " + TBL_NOTES + " where " + COL_ID + "=?";
+        Cursor cursor = rawQuery(sql, new String[]{String.valueOf(idNote)});
+        if (cursor.moveToFirst()) {
+            notes = new Notes(cursor);
+        }
+        return notes;
+    }
+
+    @Override
+    public void getNote(SQLCallback sqlCallback) {
+        try {
+            String sql = "select * from " + TBL_NOTES;
+            Cursor cursor = rawQuery(sql, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    Notes notes = new Notes(cursor);
+                    sqlCallback.callBackNoteSuccess(notes);
+//                    Log.e("note", notes.toString());
+                    cursor.moveToNext();
+                }
+                cursor.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -95,10 +139,9 @@ public class SQLDatabaseManager extends SQLiteOpenHelper implements ISqliteSchem
                     listNotes.add(notes);
                     cursor.moveToNext();
                 }
-                Log.e("arr", listNotes.toString());
+//                Log.e("arr", listNotes.toString());
                 cursor.close();
             }
-            close();
         } catch (Exception e) {
             e.printStackTrace();
         }

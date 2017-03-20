@@ -7,4 +7,9 @@
     <string name="list_notes">List notes</string>
     <string name="insert_note_success">Insert note success!</string>
     <string name="insert_note_error">Insert note error!</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancle</string>
+    <string name="delete_a_note">Delete a Note ?</string>
+    <string name="detail_note">Detail Note</string>
+    <string name="edit_note">Edit Note</string>
 </resources>
