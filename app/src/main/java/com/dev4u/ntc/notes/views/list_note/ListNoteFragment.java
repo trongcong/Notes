@@ -1,10 +1,12 @@
 package com.dev4u.ntc.notes.views.list_note;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,7 +41,7 @@ import butterknife.OnClick;
  * Time: 17:17
  */
 
-public class ListNoteFragment extends BaseFragment implements ListNoteView {
+public class ListNoteFragment extends BaseFragment implements ListNoteView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
@@ -47,10 +49,11 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView {
     FloatingActionButton mFabAdd;
     @BindView(R.id.mImgLeft)
     AppCompatImageView mImgLeft;
+    @BindView(R.id.mSRl)
+    SwipeRefreshLayout mSRl;
     private ListNotePresenter mListNotePresenter;
     private NoteAdapter mNoteAdapter;
     private List<Notes> mListNotes;
-
 
     @Override
     protected String getTitle() {
@@ -64,6 +67,15 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView {
         ButterKnife.bind(this, view);
         mImgLeft.setVisibility(View.GONE);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        mSRl.setOnRefreshListener(this);
+        mSRl.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSRl.post(new Runnable() {
+            @Override
+            public void run() {
+                mNoteAdapter.notifyDataSetChanged();
+            }
+        });
 
         initRycyclerView();
         eventClick();
@@ -152,4 +164,15 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView {
         mNoteAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onRefresh() {
+        mSRl.setRefreshing(true);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mNoteAdapter.notifyDataSetChanged();
+                mSRl.setRefreshing(false);
+            }
+        }, 1000);
+    }
 }

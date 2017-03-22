@@ -47,7 +47,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(getActivity());
         mTvTitle.setText(getTitle());
-        mImgLeft.setBackgroundResource(R.drawable.ic_btn_back);
+        mImgLeft.setBackgroundResource(R.drawable.ic_menu_back);
         getView().findViewById(R.id.mRlImgLeft).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

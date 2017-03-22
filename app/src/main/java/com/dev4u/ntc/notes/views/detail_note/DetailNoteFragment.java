@@ -92,7 +92,7 @@ public class DetailNoteFragment extends BaseFragment implements DetailNoteView, 
                 mTvDetailNote.setVisibility(View.VISIBLE);
                 mEdContentNoteEdit.setVisibility(View.GONE);
                 mTvDone.setText("");
-                mImgLeft.setBackgroundResource(R.drawable.ic_btn_back);
+                mImgLeft.setBackgroundResource(R.drawable.ic_menu_back);
                 mTvTitleActionbar.setText(getString(R.string.detail_note));
                 showToastShort("Cancel");
                 break;
@@ -113,7 +113,7 @@ public class DetailNoteFragment extends BaseFragment implements DetailNoteView, 
                     handler.postDelayed(r, 250);
                 } else if (click == 2) {
                     //Double click
-                    mImgLeft.setBackgroundResource(R.drawable.ic_btn_cancel);
+                    mImgLeft.setBackgroundResource(R.drawable.ic_menu_close);
                     mTvDetailNote.setVisibility(View.GONE);
                     mRlImgLeftCancle.setVisibility(View.VISIBLE);
                     mRlImgLeft.setVisibility(View.GONE);

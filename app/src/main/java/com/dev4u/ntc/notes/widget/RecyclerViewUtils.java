@@ -53,10 +53,11 @@ public class RecyclerViewUtils {
      * @return
      */
     public RecyclerView setUpVertical(Context context, RecyclerView recyclerView) {
-        RecyclerView.LayoutManager mLayout = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager mLayout = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayout);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
         return recyclerView;
     }
 
