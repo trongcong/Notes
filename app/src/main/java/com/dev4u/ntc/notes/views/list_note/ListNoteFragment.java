@@ -41,7 +41,7 @@ import butterknife.OnClick;
  * Time: 17:17
  */
 
-public class ListNoteFragment extends BaseFragment implements ListNoteView, SwipeRefreshLayout.OnRefreshListener {
+public class ListNoteFragment extends BaseFragment implements ListNoteView, SwipeRefreshLayout.OnRefreshListener, NoteAdapter.OnItemClickListener {
 
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
@@ -69,7 +69,7 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView, Swip
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         mSRl.setOnRefreshListener(this);
-        mSRl.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSRl.setColorScheme(new int[]{android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light});
         mSRl.post(new Runnable() {
             @Override
             public void run() {
@@ -78,39 +78,15 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView, Swip
         });
 
         initRycyclerView();
-        eventClick();
         return view;
     }
 
     private void initRycyclerView() {
         RecyclerViewUtils.Create().setUpVertical(getContext(), mRecyclerView);
         mListNotes = new ArrayList<>();
-        mNoteAdapter = new NoteAdapter(getContext(), mListNotes);
+        mNoteAdapter = new NoteAdapter(getContext(), mListNotes, this);
         mRecyclerView.setAdapter(mNoteAdapter);
         mListNotePresenter = new ListNotePresenter(getContext(), this);
-    }
-
-    private void eventClick() {
-        mNoteAdapter.setOnItemClickListener(new NoteAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                Fragment fragment = new DetailNoteFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("idNotes", mListNotes.get(position).getId());
-
-                if (bundle != null) fragment.setArguments(bundle);
-
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.addToBackStack(fragment.getClass().getName());
-                ft.replace(R.id.mFragmentLayout, fragment);
-                ft.commit();
-            }
-
-            @Override
-            public void onItemLongClick(View itemView, int position) {
-                showDialogDeleteNote(position);
-            }
-        });
     }
 
     private void showDialogDeleteNote(final int position) {
@@ -174,5 +150,23 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView, Swip
                 mSRl.setRefreshing(false);
             }
         }, 1000);
+    }
+
+    @Override
+    public void onItemClick(View itemView, int position) {
+        Fragment fragment = new DetailNoteFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("idNotes", mListNotes.get(position).getId());
+        fragment.setArguments(bundle);
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.addToBackStack(fragment.getClass().getName());
+        ft.replace(R.id.mFragmentLayout, fragment);
+        ft.commit();
+    }
+
+    @Override
+    public void onItemLongClick(View itemView, int position) {
+        showDialogDeleteNote(position);
     }
 }

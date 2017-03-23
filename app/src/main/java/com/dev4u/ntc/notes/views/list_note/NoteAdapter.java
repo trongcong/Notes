@@ -36,12 +36,9 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
 
     private List<Notes> mListNotes;
 
-    protected NoteAdapter(Context context, List<Notes> notesList) {
+    protected NoteAdapter(Context context, List<Notes> notesList, OnItemClickListener listener) {
         super(context);
         this.mListNotes = notesList;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -70,14 +67,15 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
         holder.mImgNote.setColorFilter(getRandomMaterialColor());
     }
 
+    @Override
+    public int getItemCount() {
+        return mListNotes.size();
+    }
+
     private String fChar(String str) {
         String fLetter;
         if (str.length() > 0) {
-//            if (Character.isLetter(str.charAt(0))) {
             fLetter = str.substring(0, 1).toUpperCase();
-//            } else {
-//                fLetter = str.substring(1, 2).toUpperCase();
-//            }
         } else return "";
         return fLetter;
     }
@@ -95,11 +93,6 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
         return returnColor;
     }
 
-    @Override
-    public int getItemCount() {
-        return mListNotes.size();
-    }
-
     // Define the listener interface
     public interface OnItemClickListener {
         void onItemClick(View itemView, int position);
@@ -107,7 +100,7 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
         void onItemLongClick(View itemView, int position);
     }
 
-    public class NoteHolder extends RecyclerView.ViewHolder {
+    public class NoteHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         @BindView(R.id.mImgNote)
         ImageView mImgNote;
         @BindView(R.id.icon_text)
@@ -120,34 +113,33 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
         public NoteHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Triggers click upwards to the adapter on click
-                    if (listener != null) {
-                        // gets item position
-                        int position = getAdapterPosition();
-                        // Check if an item was deleted, but the user clicked it before the UI removed it
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(itemView, position);
-                        }
-                    }
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (listener != null) {
+                // gets item position
+                int position = getAdapterPosition();
+                // Check if an item was deleted, but the user clicked it before the UI removed it
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(itemView, position);
                 }
-            });
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    if (listener != null) {
-                        // gets item position
-                        int position = getAdapterPosition();
-                        // Check if an item was deleted, but the user clicked it before the UI removed it
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemLongClick(itemView, position);
-                        }
-                    }
-                    return false;
+            }
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            if (listener != null) {
+                // gets item position
+                int position = getAdapterPosition();
+                // Check if an item was deleted, but the user clicked it before the UI removed it
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemLongClick(itemView, position);
                 }
-            });
+            }
+            return true;
         }
     }
 }
