@@ -1,10 +1,10 @@
 package com.dev4u.ntc.notes.views.list_note;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,13 +33,14 @@ import butterknife.ButterKnife;
 
 public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
     private OnItemClickListener listener;
-
     private List<Notes> mListNotes;
+    private SparseBooleanArray selectedItems;
 
     protected NoteAdapter(Context context, List<Notes> notesList, OnItemClickListener listener) {
         super(context);
         this.mListNotes = notesList;
         this.listener = listener;
+        selectedItems = new SparseBooleanArray();
     }
 
     @Override
@@ -64,7 +65,8 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
         holder.mTvTimeNote.setText(Constant.getInstance().formatTime(time));
 
         holder.mImgNote.setImageResource(R.drawable.bg_circle);
-        holder.mImgNote.setColorFilter(getRandomMaterialColor());
+        holder.mImgNote.setColorFilter(notes.getColor());
+        holder.itemView.setBackgroundColor(selectedItems.get(position) ? Color.parseColor("#e0e0e0") : Color.TRANSPARENT);
     }
 
     @Override
@@ -80,17 +82,34 @@ public class NoteAdapter extends BaseAdapter<NoteAdapter.NoteHolder> {
         return fLetter;
     }
 
-    private int getRandomMaterialColor() {
-        int returnColor = Color.GRAY;
-        int arrayId = getResources().getIdentifier("notes_color", "array", getContext().getPackageName());
+    //Toggle selection methods
+    public void toggleSelection(int position) {
+        selectView(position, !selectedItems.get(position));
+    }
 
-        if (arrayId != 0) {
-            TypedArray colors = getResources().obtainTypedArray(arrayId);
-            int index = (int) (Math.random() * colors.length());
-            returnColor = colors.getColor(index, Color.GRAY);
-            colors.recycle();
+    //Remove selected selections
+    public void removeSelection() {
+        selectedItems = new SparseBooleanArray();
+        notifyDataSetChanged();
+    }
+
+    //Put or delete selected position into SparseBooleanArray
+    public void selectView(int position, boolean value) {
+        if (value) {
+            selectedItems.put(position, value);
+        } else {
+            selectedItems.delete(position);
         }
-        return returnColor;
+        notifyDataSetChanged();
+    }
+
+    //Return all selected ids
+    public SparseBooleanArray getSelectedIds() {
+        return selectedItems;
+    }
+
+    public int getSelectedCount() {
+        return selectedItems.size();
     }
 
     // Define the listener interface

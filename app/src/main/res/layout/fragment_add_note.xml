@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".views.MainActivity">
 
     <include
@@ -20,12 +19,15 @@
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/mEdContentNote"
+            style="@style/ParagraphSmallNormalBlack"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/transparent"
+            android:focusableInTouchMode="true"
             android:gravity="top|left"
             android:hint="@string/enter_a_note"
-            android:padding="@dimen/edit_text_padding" />
+            android:padding="@dimen/edit_text_padding"
+            android:textSize="@dimen/text_size_medium" />
     </ScrollView>
 </RelativeLayout>
 

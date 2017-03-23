@@ -21,6 +21,7 @@ public class Notes implements ISqliteSchema {
     private int id;
     private String content;
     private String timestamps;
+    private int color=-1;
 
     public Notes() {
     }
@@ -63,6 +64,14 @@ public class Notes implements ISqliteSchema {
             e.printStackTrace();
         }
         return decode;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public int getId() {
