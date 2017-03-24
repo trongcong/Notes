@@ -18,6 +18,7 @@ import com.dev4u.ntc.notes.R;
 import com.dev4u.ntc.notes.model.Notes;
 import com.dev4u.ntc.notes.presenter.detail_note.DetailNoteLogicPresenter;
 import com.dev4u.ntc.notes.presenter.detail_note.DetailNoteView;
+import com.dev4u.ntc.notes.utils.KeyboardUtils;
 import com.dev4u.ntc.notes.views.base.BaseFragment;
 import com.dev4u.ntc.notes.widget.AlphaTextView;
 
@@ -87,14 +88,7 @@ public class DetailNoteFragment extends BaseFragment implements DetailNoteView, 
                 getActivity().onBackPressed();
                 break;
             case R.id.mRlImgLeftCancel:
-                mRlImgLeftCancle.setVisibility(View.GONE);
-                mRlImgLeft.setVisibility(View.VISIBLE);
-                mTvDetailNote.setVisibility(View.VISIBLE);
-                mEdContentNoteEdit.setVisibility(View.GONE);
-                mTvDone.setText("");
-                mImgLeft.setBackgroundResource(R.drawable.ic_menu_back);
-                mTvTitleActionbar.setText(getString(R.string.detail_note));
-                showToastShort("Cancel");
+                cancelEditNote();
                 break;
             case R.id.mTvDetailNote:
                 click++;
@@ -113,21 +107,39 @@ public class DetailNoteFragment extends BaseFragment implements DetailNoteView, 
                     handler.postDelayed(r, 250);
                 } else if (click == 2) {
                     //Double click
-                    mImgLeft.setBackgroundResource(R.drawable.ic_menu_close);
-                    mTvDetailNote.setVisibility(View.GONE);
-                    mRlImgLeftCancle.setVisibility(View.VISIBLE);
-                    mRlImgLeft.setVisibility(View.GONE);
-                    mEdContentNoteEdit.setVisibility(View.VISIBLE);
-                    mTvTitleActionbar.setText(getString(R.string.edit_note));
-
-                    mEdContentNoteEdit.setText(mContentNote);
-                    mEdContentNoteEdit.setFocusableInTouchMode(true);
-
-                    mEdContentNoteEdit.addTextChangedListener(this);
+                    detailNoteDoubleClick();
                     click = 0;
                 }
                 break;
         }
+    }
+
+    private void cancelEditNote() {
+        mRlImgLeftCancle.setVisibility(View.GONE);
+        mRlImgLeft.setVisibility(View.VISIBLE);
+        mTvDetailNote.setVisibility(View.VISIBLE);
+        mEdContentNoteEdit.setVisibility(View.GONE);
+        mTvDone.setText("");
+        KeyboardUtils.hideSoftKeyboard(getActivity());
+        mImgLeft.setBackgroundResource(R.drawable.ic_menu_back);
+        mTvTitleActionbar.setText(getString(R.string.detail_note));
+        showToastShort("Cancel");
+    }
+
+    private void detailNoteDoubleClick() {
+        mImgLeft.setBackgroundResource(R.drawable.ic_menu_close);
+        mTvDetailNote.setVisibility(View.GONE);
+        mRlImgLeftCancle.setVisibility(View.VISIBLE);
+        mRlImgLeft.setVisibility(View.GONE);
+        mEdContentNoteEdit.setVisibility(View.VISIBLE);
+        mTvTitleActionbar.setText(getString(R.string.edit_note));
+
+        mEdContentNoteEdit.setText(mContentNote);
+        KeyboardUtils.showKeyboard(mEdContentNoteEdit);
+        mEdContentNoteEdit.requestFocus();
+        mEdContentNoteEdit.setFocusableInTouchMode(true);
+
+        mEdContentNoteEdit.addTextChangedListener(this);
     }
 
     @Override
@@ -145,6 +157,7 @@ public class DetailNoteFragment extends BaseFragment implements DetailNoteView, 
     public void updateNoteSuccess() {
         showToastShort("Update a Note success!");
         getFragmentManager().popBackStack();
+        KeyboardUtils.hideSoftKeyboard(getActivity());
     }
 
     @Override

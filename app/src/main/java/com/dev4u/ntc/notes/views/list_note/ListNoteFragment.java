@@ -48,7 +48,7 @@ import butterknife.OnClick;
  */
 
 public class ListNoteFragment extends BaseFragment implements ListNoteView, ActionMode.Callback,
-        SwipeRefreshLayout.OnRefreshListener, NoteAdapter.OnItemClickListener, CallBackDelete {
+        SwipeRefreshLayout.OnRefreshListener, NoteAdapter.OnItemClickListener {
 
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
@@ -62,7 +62,6 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView, Acti
     private NoteAdapter mNoteAdapter;
     private List<Notes> mListNotes;
     private ActionMode mActionMode;
-    private CallBackDelete callBackDelete;
     private DeleteNoteDialog deleteNoteDialog;
 
     @Override
@@ -148,18 +147,22 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView, Acti
             if (selected.valueAt(i)) {
                 //If current id is selected remove the item via key
                 //key is position of item
-                callBackDelete.onDeleteItem(new Notes(mListNotes.get(selected.keyAt(i)).getId(), "a", "a"));
+                mListNotePresenter.deleteNote(new Notes(mListNotes.get(selected.keyAt(i)).getId(), "a", "a"));
+
                 Log.e("po", selected.keyAt(i) + "");
                 mListNotes.remove(selected.keyAt(i));
                 mNoteAdapter.notifyDataSetChanged();
             }
         }
+        mActionMode.finish();
         Toast.makeText(getContext(), selected.size() + " item deleted.", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.mFabAdd)
     public void onClick() {
-        mActionMode.finish();
+        if (mActionMode != null) {
+            mActionMode.finish();
+        }
         Fragment fragment = new AddNoteFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.addToBackStack(fragment.getClass().getName());
@@ -237,7 +240,7 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView, Acti
                 // delete all the selected messages
                 showDialogDeleteNote();
 //                deleteItems();
-                mode.finish();
+//                mode.finish();
                 return true;
             default:
                 return false;
@@ -254,10 +257,5 @@ public class ListNoteFragment extends BaseFragment implements ListNoteView, Acti
                 mNoteAdapter.notifyDataSetChanged();
             }
         });
-    }
-
-    @Override
-    public void onDeleteItem(Notes notes) {
-        mListNotePresenter.deleteNote(notes);
     }
 }

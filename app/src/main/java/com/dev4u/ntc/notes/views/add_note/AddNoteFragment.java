@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import com.dev4u.ntc.notes.R;
 import com.dev4u.ntc.notes.presenter.add_note.AddNoteLogicPresenter;
 import com.dev4u.ntc.notes.presenter.add_note.AddNoteView;
+import com.dev4u.ntc.notes.utils.KeyboardUtils;
 import com.dev4u.ntc.notes.views.base.BaseFragment;
 import com.dev4u.ntc.notes.widget.AlphaTextView;
 
@@ -85,6 +86,7 @@ public class AddNoteFragment extends BaseFragment implements AddNoteView {
     public void addNoteSuccess() {
         showToastLong(getString(R.string.insert_note_success));
         getFragmentManager().popBackStack();
+        KeyboardUtils.hideSoftKeyboard(getActivity());
     }
 
     @Override

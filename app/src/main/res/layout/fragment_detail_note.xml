@@ -31,13 +31,16 @@
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/mEdContentNoteEdit"
+                style="@style/ParagraphSmallNormalBlack"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/transparent"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="top|left"
                 android:hint="@string/enter_a_note"
                 android:padding="@dimen/edit_text_padding"
+                android:textSize="@dimen/text_size_medium"
                 android:visibility="gone" />
         </RelativeLayout>
 
