@@ -12,4 +12,6 @@
     <string name="delete_a_note">Delete a Note ?</string>
     <string name="detail_note">Detail Note</string>
     <string name="edit_note">Edit Note</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="add_phone_number">Add your phone number</string>
 </resources>
